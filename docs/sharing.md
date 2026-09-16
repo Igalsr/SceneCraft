@@ -4,6 +4,8 @@ Use one Git repository as the source of truth. It keeps the runtime, schemas, tr
 
 ## Collaborator setup
 
+Share [the new-laptop setup guide](new-laptop-setup.md), including its copy-paste Codex setup prompt. It covers cloning, isolated dependencies, persistent native Blender, plugin installation, real rendering tests, and the first reference-based model. A clone or plugin installation alone is not sufficient.
+
 After cloning, create a virtual environment, install the project with its development extras, and run scenecraft doctor.
 
 The repository marketplace is `.agents/plugins/marketplace.json` and the plugin source is `plugins/scenecraft`. A collaborator runs `codex plugin marketplace add /absolute/path/to/repository`, then `codex plugin add scenecraft@scenecraft-workflows`, selects Astra, and starts a new task so the skill is loaded. No OpenAI SDK or API credential is required.

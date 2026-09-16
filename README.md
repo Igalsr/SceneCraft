@@ -16,6 +16,10 @@ Retries archive the previous attempt's outputs and logs. Evaluation failures res
 
 ## Install
 
+New laptop? Start with **[Set up SceneCraft with Codex](docs/new-laptop-setup.md)**. It includes a copy-paste prompt that asks Codex to clone this repository, install dependencies and the plugin, verify headless Blender, and prepare your first model. Cloning alone is not a complete installation.
+
+For an existing checkout with Python and Blender already available:
+
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
@@ -23,7 +27,7 @@ python -m pip install -e .
 scenecraft doctor
 ```
 
-The Python package depends on Pillow for reference decoding and deterministic image metrics. It does not install an OpenAI package.
+The Python package depends on Pillow for reference decoding and deterministic image metrics, and jsonschema for contract validation. It does not install an OpenAI package. If Blender is not on `PATH`, pass its executable path with `scenecraft doctor --blender /path/to/blender` and on later build/resume commands.
 
 ## Run a reconstruction
 
