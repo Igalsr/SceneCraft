@@ -20,6 +20,26 @@ To use the wrapper, set `SCENECRAFT_PROJECT` to the absolute project directory a
 
 The CLI accepts an explicit Blender executable path. On Apple silicon, use native macOS Blender; x86_64 emulation can be impractically slow. CPU Cycles is used for portable headless rendering. CI runs unit/contract checks and real Blender building/master smoke tests on pushes and pull requests. Local skipped smoke tests are not renderer validation.
 
+### Docker verification
+
+This advanced route assumes a Linux x86_64 host, an approved running Docker installation, the image built above, and the repository's `.venv` installed with `.[dev]`. It is separate from the native laptop walkthrough. CI's native Linux Blender tests do not prove that your Docker installation or container image works.
+
+Do **not** simply set `SCENECRAFT_BLENDER` to the wrapper and run the native smoke command. The tests create temporary job directories, while the wrapper mounts only `SCENECRAFT_PROJECT` writable. Those jobs would normally be outside the mount. Use a fresh test root and make Python create its temporary directories beneath that same root:
+
+```sh
+scenecraft_repo=$(pwd -P)
+mkdir -p "$scenecraft_repo/artifacts"
+scenecraft_smoke_root=$(mktemp -d "$scenecraft_repo/artifacts/docker-smoke.XXXXXX")
+SCENECRAFT_PROJECT="$scenecraft_smoke_root" \
+TMPDIR="$scenecraft_smoke_root" \
+SCENECRAFT_BLENDER="$scenecraft_repo/scripts/docker-blender" \
+  "$scenecraft_repo/.venv/bin/python" -m pytest -q
+```
+
+Run from the checkout root. `TMPDIR` must be set before the test process starts. It places every temporary Blender job inside the writable mount without exposing the host's entire temporary directory. Require all tests to pass, including both renderer tests; capture output and the exit status in the setup report. Preserve failed-check logs. Do not report container verification if Docker was unavailable or only native Blender was tested.
+
+For an actual modeling run, set `SCENECRAFT_PROJECT` to that model's absolute project directory instead of the test root and pass the absolute wrapper path via `--blender`. The test command's environment settings apply only to that command; they do not configure later runs. The optional synthetic benchmark creates multiple project roots, so use native Blender for that benchmark unless you deliberately configure a mount containing all its generated roots.
+
 ## Data boundaries
 
 Reference stores, `.scenecraft` state/memory, runs, artifacts, and deliverables are ignored at every project depth, including the nested projects in the README. Curated examples require deliberate review; large binaries should use Git LFS or release assets.
