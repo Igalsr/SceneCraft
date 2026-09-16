@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/job.schema.json",
+  "title": "SceneCraft Blender Job",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "job_id", "operation", "workspace_root", "inputs", "outputs", "settings"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "job_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,159}$"},
+    "operation": {"enum": ["build_scene", "build_object"]},
+    "workspace_root": {"type": "string", "minLength": 1},
+    "inputs": {
+      "type": "object", "additionalProperties": false, "required": ["building_spec"],
+      "properties": {"building_spec": {"type": "string", "minLength": 1}}
+    },
+    "outputs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["blend", "glb", "preview", "scene_manifest", "result"],
+      "properties": {
+        "blend": {"type": "string", "minLength": 1},
+        "glb": {"type": "string", "minLength": 1},
+        "preview": {"type": "string", "minLength": 1},
+        "scene_manifest": {"type": "string", "minLength": 1},
+        "result": {"type": "string", "minLength": 1},
+        "stl": {"type": "string", "minLength": 1},
+        "geometry_report": {"type": "string", "minLength": 1}
+        ,"inspection_back": {"type": "string", "minLength": 1}
+        ,"inspection_side": {"type": "string", "minLength": 1}
+        ,"inspection_top": {"type": "string", "minLength": 1}
+      }
+    },
+    "settings": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "render_width": {"type": "integer", "minimum": 64, "maximum": 4096},
+        "render_height": {"type": "integer", "minimum": 64, "maximum": 4096}
+      }
+    }
+  },
+  "allOf": [{"if": {"properties": {"operation": {"const": "build_object"}}}, "then": {"properties": {"outputs": {"required": ["stl", "geometry_report", "inspection_back", "inspection_side", "inspection_top"]}}}, "else": {"properties": {"outputs": {"maxProperties": 5}}}}]
+}

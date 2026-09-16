@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/geometry-report.schema.json",
+  "title": "Object/master geometry screening report",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "units", "stl_units", "dimensions_m", "volume_m3", "components", "non_manifold_edges", "inconsistent_edges", "loose_vertices", "degenerate_faces", "detected_intersections", "dimensions_passed", "passed", "manual_checks_required", "limitations"],
+  "properties": {
+    "schema_version": {"const": 1}, "kind": {"enum": ["object", "positive-master"]},
+    "units": {"const": "meters"}, "stl_units": {"const": "millimeters"},
+    "dimensions_m": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "minimum": 0}},
+    "volume_m3": {"type": "number"},
+    "components": {"type": "integer", "minimum": 0},
+    "non_manifold_edges": {"type": "integer", "minimum": 0},
+    "inconsistent_edges": {"type": "integer", "minimum": 0},
+    "loose_vertices": {"type": "integer", "minimum": 0},
+    "degenerate_faces": {"type": "integer", "minimum": 0},
+    "detected_intersections": {"type": "integer", "minimum": 0},
+    "dimensions_passed": {"type": "boolean"}, "passed": {"type": "boolean"},
+    "manual_checks_required": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "string"}
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "name": "Minimal House Massing",
+  "units": "meters",
+  "envelope": {
+    "width": 12.0,
+    "depth": 8.0,
+    "height": 6.4
+  },
+  "floors": 2,
+  "wall_thickness": 0.25,
+  "camera": {
+    "position": [16.0, -18.0, 11.0],
+    "target": [0.0, 0.0, 3.2],
+    "lens_mm": 48.0
+  },
+  "materials": {
+    "wall_rgb": [0.72, 0.68, 0.60],
+    "roof_rgb": [0.12, 0.13, 0.14],
+    "glass_rgb": [0.18, 0.34, 0.42],
+    "accent_rgb": [0.08, 0.09, 0.10]
+  },
+  "volumes": [
+    {
+      "id": "entry-wing",
+      "center": [3.6, -3.5, 2.0],
+      "dimensions": [3.6, 2.0, 4.0],
+      "material": "wall"
+    }
+  ],
+  "openings": [
+    {
+      "id": "front-window-01",
+      "kind": "window",
+      "facade": "front",
+      "center": [-2.6, 3.9],
+      "width": 3.2,
+      "height": 2.0,
+      "frame_width": 0.1
+    },
+    {
+      "id": "front-door-01",
+      "kind": "door",
+      "facade": "front",
+      "center": [2.8, 1.3],
+      "width": 1.2,
+      "height": 2.6
+    }
+  ],
+  "elements": [
+    {
+      "id": "entry-canopy",
+      "semantic": "canopy",
+      "center": [2.8, -4.25, 2.9],
+      "dimensions": [2.4, 1.5, 0.18],
+      "material": "accent"
+    }
+  ],
+  "roof": {"type": "flat", "overhang": 0.2},
+  "uncertainties": [
+    {
+      "field": "envelope.depth",
+      "reason": "A hero image alone does not fully constrain depth.",
+      "confidence": 0.55
+    }
+  ]
+}

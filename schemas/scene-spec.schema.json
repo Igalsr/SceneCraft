@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/scene-spec.schema.json",
+  "title": "SceneCraft structured scene plan",
+  "oneOf": [{"$ref": "building-spec.schema.json"}, {"$ref": "object-spec.schema.json"}]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/analysis-request.schema.json",
+  "title": "SceneCraft Agent Analysis Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "orchestrator",
+    "project",
+    "references",
+    "controlling_reference_id",
+    "validated_lessons",
+    "expected_output_schema",
+    "instructions"
+  ],
+  "properties": {
+    "schema_version": {"const": 3},
+    "orchestrator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "required_model", "api_call"],
+      "properties": {
+        "mode": {"const": "codex-agent"},
+        "required_model": {"const": "gpt-6-astra"},
+        "api_call": {"const": false}
+      }
+    },
+    "project": {"type": "object"},
+    "references": {"type": "array", "items": {"type": "object"}},
+    "controlling_reference_id": {"type": "string", "minLength": 1},
+    "validated_lessons": {"type": "array", "items": {"type": "object"}},
+    "expected_output_schema": {"const": "schemas/scene-spec.schema.json"},
+    "instructions": {"type": "array", "items": {"type": "string"}}
+  }
+}

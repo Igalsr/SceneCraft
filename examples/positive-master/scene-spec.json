@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "positive-master",
+  "name": "Rounded pawn master",
+  "units": "meters",
+  "camera": {"position": [0.15, -0.22, 0.14], "target": [0, 0, 0.04], "lens_mm": 55},
+  "objects": [
+    {"id": "base", "primitive": "cylinder", "operation": "union", "center": [0, 0, 0.005], "dimensions": [0.05, 0.05, 0.01], "rotation_deg": [0, 0, 0], "color": [0.6, 0.65, 0.75]},
+    {"id": "body", "primitive": "sphere", "operation": "union", "center": [0, 0, 0.032], "dimensions": [0.036, 0.036, 0.055], "rotation_deg": [0, 0, 0], "color": [0.6, 0.65, 0.75]},
+    {"id": "head", "primitive": "sphere", "operation": "union", "center": [0, 0, 0.067], "dimensions": [0.028, 0.028, 0.028], "rotation_deg": [0, 0, 0], "color": [0.6, 0.65, 0.75]}
+  ],
+  "manufacturing": {
+    "target_dimensions_m": [0.05, 0.05, 0.081], "dimension_tolerance_m": 0.0001,
+    "minimum_feature_m": 0.001,
+    "scale_source": "Repository benchmark explicitly defines a 50 mm diameter, 81 mm tall master; not inferred from an image",
+    "release_strategy": "Benchmark only: evaluate a split or cut silicone mold around the neck undercut; physical process approval remains required"
+  },
+  "required_features": ["flat-circular-base", "rounded-body", "round-head", "visible-neck"],
+  "uncertainties": [{"field": "manufacturing", "reason": "Printer, silicone properties, minimum detail and demolding process require review", "confidence": 0.5}]
+}

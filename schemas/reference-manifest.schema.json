@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/reference-manifest.schema.json",
+  "title": "SceneCraft Reference Manifest",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "references"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "file", "sha256", "role", "view", "notes", "immutable", "width", "height", "format"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "file": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "role": {"enum": ["primary", "supporting", "material", "scale"]},
+          "view": {"type": "string", "minLength": 1},
+          "notes": {"type": "string"},
+          "immutable": {"const": true},
+          "width": {"type": "integer", "minimum": 16},
+          "height": {"type": "integer", "minimum": 16},
+          "format": {"enum": ["png", "jpeg", "webp"]}
+        }
+      }
+    }
+  }
+}

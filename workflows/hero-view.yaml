@@ -1,0 +1,18 @@
+schema_version: 1
+name: hero-view
+required_reference_roles:
+  - primary
+stages:
+  - ingest_references
+  - analyze_references
+  - plan_geometry
+  - build_geometry
+  - render_evidence
+  - evaluate_fidelity
+  - repair_model
+  - package_deliverable
+  - learn_from_run
+loop:
+  from: repair_model
+  to: build_geometry
+  max_iterations: 8

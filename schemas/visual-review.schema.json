@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/visual-review.schema.json",
+  "title": "Evidence-bound visual review",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "run_id", "iteration", "request_sha256", "reviewer", "verdict", "features", "issues"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string"},
+    "iteration": {"type": "integer", "minimum": 0},
+    "request_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "reviewer": {"enum": ["astra-agent", "human"]},
+    "verdict": {"enum": ["pass", "repair"]},
+    "features": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "passed", "observation"],
+        "properties": {"id": {"type": "string", "minLength": 1}, "passed": {"type": "boolean"}, "observation": {"type": "string", "minLength": 1}}
+      }
+    },
+    "issues": {"type": "array", "maxItems": 200, "items": {"type": "string", "minLength": 1}}
+  }
+}

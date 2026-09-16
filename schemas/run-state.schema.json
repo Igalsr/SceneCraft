@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scenecraft.local/schemas/run-state.schema.json",
+  "title": "SceneCraft Run State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "project_id",
+    "current_stage",
+    "status",
+    "completed_stages",
+    "iteration",
+    "max_iterations",
+    "project_digest",
+    "reference_digests",
+    "artifacts",
+    "message",
+    "last_error",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$"},
+    "project_id": {"type": "string", "minLength": 1},
+    "current_stage": {
+      "enum": [
+        "ingest_references",
+        "analyze_references",
+        "plan_geometry",
+        "build_geometry",
+        "render_evidence",
+        "evaluate_fidelity",
+        "repair_model",
+        "package_deliverable",
+        "learn_from_run",
+        "complete"
+      ]
+    },
+    "status": {"enum": ["pending", "running", "waiting", "completed", "failed"]},
+    "completed_stages": {"type": "array", "items": {"type": "string"}},
+    "iteration": {"type": "integer", "minimum": 0},
+    "max_iterations": {"type": "integer", "minimum": 1},
+    "project_digest": {"type": "string"},
+    "reference_digests": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "message": {"type": "string"},
+    "last_error": {"type": ["string", "null"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"}
+  }
+}

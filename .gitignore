@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# SceneCraft runtime data
+**/runs/
+**/deliverables/
+**/*.blend1
+**/.scenecraft/
+**/inputs/references/
+**/artifacts/
+/runs/
+/deliverables/
+/*.blend
+/*.glb
+/*.exr

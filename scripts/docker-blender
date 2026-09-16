@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repository=$(dirname "$script_dir")
+project=${SCENECRAFT_PROJECT:?Set SCENECRAFT_PROJECT to the absolute project directory}
+case "$project" in
+  /*) ;;
+  *) echo "SCENECRAFT_PROJECT must be absolute" >&2; exit 2 ;;
+esac
+test -d "$project"
+
+exec docker run --rm --platform linux/amd64 \
+  --volume "$repository:$repository:ro" \
+  --volume "$project:$project" \
+  --workdir "$project" \
+  --entrypoint /opt/blender/blender \
+  scenecraft-blender:4.5.13 "$@"

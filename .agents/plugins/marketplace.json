@@ -1,0 +1,20 @@
+{
+  "name": "scenecraft-workflows",
+  "interface": {
+    "displayName": "Scenecraft Workflows"
+  },
+  "plugins": [
+    {
+      "name": "scenecraft",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scenecraft"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

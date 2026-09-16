@@ -1,0 +1,20 @@
+schema_version: 1
+name: multi-view
+availability: planned
+required_reference_roles:
+  - primary
+  - supporting
+stages:
+  - ingest_references
+  - analyze_references
+  - plan_geometry
+  - build_geometry
+  - render_evidence
+  - evaluate_fidelity
+  - repair_model
+  - package_deliverable
+  - learn_from_run
+loop:
+  from: repair_model
+  to: build_geometry
+  max_iterations: 12

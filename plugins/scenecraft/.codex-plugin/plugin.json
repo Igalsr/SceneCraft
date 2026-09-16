@@ -1,0 +1,21 @@
+{
+  "name": "scenecraft",
+  "version": "0.1.0+codex.20260916093949",
+  "description": "Reference-image-to-Blender objects, figures, buildings, and positive mold masters",
+  "author": {
+    "name": "SceneCraft contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "SceneCraft",
+    "shortDescription": "Build and review 3D objects and mold masters.",
+    "longDescription": "SceneCraft guides Astra and trusted headless Blender from reference images through structured modeling, metric and visual review, repair, positive-master geometry checks, exports, and reusable learning.",
+    "developerName": "SceneCraft contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": "Use SceneCraft to model this object from my reference images."
+  }
+}

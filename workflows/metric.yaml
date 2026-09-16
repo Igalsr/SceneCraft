@@ -1,0 +1,21 @@
+schema_version: 1
+name: metric
+availability: planned
+required_reference_roles:
+  - primary
+stages:
+  - ingest_references
+  - analyze_references
+  - plan_geometry
+  - build_geometry
+  - render_evidence
+  - evaluate_fidelity
+  - repair_model
+  - package_deliverable
+  - learn_from_run
+requirements:
+  metric_evidence: true
+loop:
+  from: repair_model
+  to: build_geometry
+  max_iterations: 12

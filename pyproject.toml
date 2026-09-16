@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scenecraft-workflow"
+version = "0.1.0"
+description = "Reference-image-to-Blender workflow with resumable Astra orchestration"
+readme = "README.md"
+license = "0BSD"
+requires-python = ">=3.11"
+dependencies = ["Pillow>=11,<13", "jsonschema>=4.23,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "jsonschema>=4.23", "ruff>=0.9"]
+
+[project.scripts]
+scenecraft = "scenecraft.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scenecraft"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"blender/runner.py" = "scenecraft/resources/blender_runner.py"
+"blender/object_runner.py" = "scenecraft/resources/object_runner.py"
+"schemas" = "scenecraft/resources/schemas"
+"workflows" = "scenecraft/resources/workflows"
+"knowledge/lessons.json" = "scenecraft/resources/knowledge/lessons.json"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

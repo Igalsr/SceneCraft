@@ -1,0 +1,8 @@
+interface:
+  display_name: "SceneCraft"
+  short_description: "Model objects, figures and positive mold masters"
+  brand_color: "#4D6A5B"
+  default_prompt: "Use $scenecraft to model this object from my reference images, review it, and preserve useful lessons."
+
+policy:
+  allow_implicit_invocation: true
