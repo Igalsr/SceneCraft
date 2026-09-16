@@ -12,9 +12,9 @@ The repository marketplace is `.agents/plugins/marketplace.json` and the plugin 
 
 ## Blender reproducibility
 
-The x86_64 container definition pins both the Debian image digest and the official Blender 4.5.13 Linux archive checksum. Build it from the repository root with:
+SceneCraft requires Blender 5.2 or newer. The x86_64 container definition pins both the Debian image digest and the official Blender 5.2.2 Linux archive checksum. Build it from the repository root with:
 
-    docker build -t scenecraft-blender:4.5.13 containers/blender-cpu
+    docker build -t scenecraft-blender:5.2.2 containers/blender-cpu
 
 To use the wrapper, set `SCENECRAFT_PROJECT` to the absolute project directory and pass `--blender /absolute/repository/scripts/docker-blender`. Only that project is mounted writable; the runner repository is mounted read-only.
 
@@ -38,6 +38,6 @@ Before tagging a release:
 - complete at least one reference-to-repair-to-package benchmark and preserve its public evidence;
 - confirm the repository license, visibility, and release notes.
 
-The September 2026 synthetic master benchmark is documented in `examples/positive-master/benchmark.md`. Its reference was rendered from a known specification; it validates repair plumbing and mesh/export checks, not arbitrary-image reconstruction accuracy.
+The September 2026 synthetic master benchmark is documented in `examples/positive-master/benchmark.md`. It is historical evidence from Blender 4.5.13, not validation of the current Blender baseline. Its reference was rendered from a known specification; it validates repair plumbing and mesh/export checks, not arbitrary-image reconstruction accuracy. Current compatibility must be established by tests on Blender 5.2 or newer.
 
 The repository code is licensed under `0BSD`. Reference images, generated models, and other user-provided project data retain their own applicable rights and are not relicensed merely by being processed with SceneCraft.

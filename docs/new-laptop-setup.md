@@ -29,7 +29,8 @@ Read AGENTS.md, README.md, and docs/new-laptop-setup.md from the checkout,
 then follow the setup procedure in that guide.
 
 Use an isolated Python environment and the trusted repository Blender code.
-Prefer Python 3.13 and native Blender 4.5.13 for this machine. Ask for approval
+Prefer Python 3.13 and native Blender 5.2.2 LTS for this machine; Blender must
+be at least 5.2. Do not downgrade an existing newer version. Ask for approval
 before installing system software, changing an existing installation, or
 changing Codex plugin configuration. Do not disable security controls.
 Use my active GPT-6 Astra Codex task; do not install an OpenAI SDK, ask for
@@ -93,7 +94,7 @@ Using the environment's Python by explicit path avoids activation and PowerShell
 
 ### 3. Install or locate Blender
 
-Prefer the verified version **Blender 4.5.13 LTS** from the [official Blender release directory](https://download.blender.org/release/Blender4.5/). Select the correct operating system and CPU architecture. Verify downloaded archives against the matching official SHA-256 file before using them. Avoid an unversioned package-manager install that might select a different major release. Reuse a suitable existing installation, or install side by side with approval; do not remove someone else's Blender version.
+Require **Blender 5.2 or newer**. Prefer the reproducible baseline **Blender 5.2.2 LTS** from the [official Blender release directory](https://download.blender.org/release/Blender5.2/). Select the correct operating system and CPU architecture. Verify downloaded archives against the matching official SHA-256 file before using them. Reuse an existing newer stable version if it passes the smoke tests; do not downgrade it. For a new installation, prefer a versioned download over an unversioned package-manager install. Install side by side with approval if necessary; do not remove someone else's Blender version.
 
 Keep Blender in a persistent installation directory, not a temporary mount or downloads cache. Discover the executable rather than assuming it is on `PATH`:
 
@@ -113,11 +114,11 @@ PowerShell equivalent:
 .\.venv\Scripts\python.exe -m scenecraft doctor --blender "C:\actual\path\blender.exe"
 ```
 
-Check the returned version, `blender.available`, and `trusted_runner.available`. `doctor` detects an executable; it does not enforce a Blender version, render a scene, or verify your Astra account. Record a version mismatch instead of calling it a pinned-version verification.
+Check the returned version, `blender.available`, and `trusted_runner.available`. `doctor` rejects Blender older than 5.2 and unrecognized version output. It does not render a scene or verify your Astra account. Record the actual version; testing a newer release is not a test of the pinned 5.2.2 baseline.
 
 Use the same `--blender` path on later `run`/`resume` commands; the CLI does not persist it automatically. `SCENECRAFT_BLENDER` below is a **test-only setting**, not the CLI's Blender configuration.
 
-Native macOS Apple silicon and Linux x86_64 have passed real Blender tests. Windows instructions are provided, but this repository has no Windows CI validation; only a successful smoke test on that machine establishes local runtime readiness. The optional Linux x86_64 Docker route is in [sharing.md](sharing.md); native installation is the simpler laptop default.
+Native macOS Apple silicon and Linux x86_64 are the test targets; CI pins Blender 5.2.2 on Linux. Consult the test results for the checkout you installed rather than treating older Blender results as proof. Windows instructions are provided, but this repository has no Windows CI validation; only a successful smoke test on that machine establishes local runtime readiness. The optional Linux x86_64 Docker route is in [sharing.md](sharing.md); native installation is the simpler laptop default.
 
 ### 4. Install the Codex plugin
 

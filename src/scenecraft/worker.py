@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import shlex
 import shutil
 import subprocess
@@ -14,6 +15,8 @@ from .contracts import validate_scene_spec
 from .errors import WorkerError
 from .protocol import JobRequest, JobResult
 from .util import read_json, resolve_inside, sha256_file
+
+MINIMUM_BLENDER_VERSION = (5, 2, 0)
 
 
 @dataclass(frozen=True)
@@ -58,11 +61,22 @@ class BlenderWorker:
         except (OSError, subprocess.TimeoutExpired) as exc:
             return BlenderInfo(resolved, False, error=str(exc))
         first_line = (completed.stdout or completed.stderr).splitlines()
+        version = first_line[0] if first_line else None
+        error = None
+        if completed.returncode != 0:
+            error = completed.stderr.strip() or f"Blender version check exited {completed.returncode}"
+        else:
+            match = re.fullmatch(r"Blender (\d+)\.(\d+)\.(\d+)(?:\s.*)?", version or "")
+            minimum = ".".join(map(str, MINIMUM_BLENDER_VERSION))
+            if match is None:
+                error = f"Cannot verify Blender version; SceneCraft requires Blender {minimum} or newer"
+            elif tuple(map(int, match.groups())) < MINIMUM_BLENDER_VERSION:
+                error = f"SceneCraft requires Blender {minimum} or newer; found {version}"
         return BlenderInfo(
             resolved,
-            completed.returncode == 0,
-            version=first_line[0] if first_line else None,
-            error=None if completed.returncode == 0 else completed.stderr.strip(),
+            error is None,
+            version=version,
+            error=error,
         )
 
     def command(self, job_path: Path) -> list[str]:

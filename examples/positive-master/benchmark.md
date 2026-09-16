@@ -1,5 +1,7 @@
 # Verified synthetic positive-master benchmark
 
+Historical benchmark: this run predates the Blender 5.2 minimum. It is preserved as original evidence, not a recommendation to install Blender 4.5 or a claim of Blender 5.2 validation. Re-running it now requires a supported Blender version and a fresh output directory.
+
 Executed on native Apple-silicon Blender 4.5.13 LTS on 2026-09-16. The official macOS archive was verified against SHA-256 `663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53` from the [official checksum file](https://download.blender.org/release/Blender4.5/blender-4.5.13.sha256).
 
 The fixture is a positive pawn master: circular plinth, rounded body and round head. Its source specification defines 50 × 50 × 81 mm. The reference is rendered from that known specification, so the benchmark tests the workflow rather than independent reconstruction.

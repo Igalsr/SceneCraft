@@ -1,8 +1,8 @@
 ARG BLENDER_PLATFORM=linux/amd64
 FROM --platform=${BLENDER_PLATFORM} debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171
 
-ARG BLENDER_ARCHIVE_URL=https://download.blender.org/release/Blender4.5/blender-4.5.13-linux-x64.tar.xz
-ARG BLENDER_ARCHIVE_SHA256=da4e69b06b75b9e642d106496c50e7e240218b411d2f6e18271c1d1d819cef91
+ARG BLENDER_ARCHIVE_URL=https://download.blender.org/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz
+ARG BLENDER_ARCHIVE_SHA256=84098912789dc450e95697c4184fb8a90acbe5111c2ba4aede3fecb57806a168
 
 RUN test -n "$BLENDER_ARCHIVE_URL" && test -n "$BLENDER_ARCHIVE_SHA256"
 RUN apt-get update && apt-get install -y --no-install-recommends \

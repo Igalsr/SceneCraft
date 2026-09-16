@@ -20,8 +20,8 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - name: Download pinned Blender
         run: |
-          curl --fail --location --output /tmp/blender.tar.xz https://download.blender.org/release/Blender4.5/blender-4.5.13-linux-x64.tar.xz
-          echo "da4e69b06b75b9e642d106496c50e7e240218b411d2f6e18271c1d1d819cef91  /tmp/blender.tar.xz" | sha256sum --check -
+          curl --fail --location --output /tmp/blender.tar.xz https://download.blender.org/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz
+          echo "84098912789dc450e95697c4184fb8a90acbe5111c2ba4aede3fecb57806a168  /tmp/blender.tar.xz" | sha256sum --check -
           mkdir /tmp/blender
           tar -xJf /tmp/blender.tar.xz --strip-components=1 -C /tmp/blender
       - run: pytest -q tests/test_blender_smoke.py

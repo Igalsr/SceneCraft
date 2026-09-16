@@ -11,7 +11,7 @@ Retries archive the previous attempt's outputs and logs. Evaluation failures res
 ## Requirements
 
 - Python 3.11–3.14
-- Blender 4.5 LTS; the container pins Blender 4.5.13
+- Blender 5.2 or newer; Blender 5.2.2 LTS is pinned for CI and the container. Newer versions must pass the local smoke tests.
 - A Codex account with GPT-6 Astra when using agent planning and visual critique
 
 ## Install
